@@ -5,4 +5,6 @@ CREATE TABLE IF NOT EXISTS user (
     password VARCHAR(200) NOT NULL,
     createAt DATETIME NULL DEFAULT now(),
     PRIMARY KEY (id)
-); 
+);
+
+select * from user;

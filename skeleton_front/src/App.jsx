@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 
+import UserMain from './user/userMain'
 import Header from './home/component/Header'
 import Footer from './home/component/Footer'
 import HomeMain from './home/HomeMain'
@@ -14,6 +15,7 @@ const App = () => {
       즉 XXXMain 만 이곳에서 등록하고 XXX 업무에 의한 화면 라우팅은 XXXMain에 명시 */}
       <Routes>
         <Route path='/' element = {<HomeMain />} />
+        <Route path='/user/*' element={<UserMain />} />
       </Routes>
       <Footer/>
     </div>
