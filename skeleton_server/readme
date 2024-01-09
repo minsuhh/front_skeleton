@@ -13,3 +13,9 @@ http://localhost:8000/
 >git add .
 >git commit -m "초기 셋팅"
 >git push -u origin main
+
+//서버 구동 명령어
+>npm nodemon app.js
+
+//프론트 구동 명령어
+>npm run dev

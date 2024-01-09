@@ -4,3 +4,9 @@
 
 >npm install axios bootstrap react-router react-router-dom styled-component
 -----------------------------------------------------------------------껍데기(front-end)
+
+public/js.a.js
+- component 에서 import해서 사용되는 js가 아니라
+- html파일에 <script>로 이용되는 파일
+
+vendor - 특별한 의미의 단어가 아니라 bootstrap template을 제공하는 개인/기관 등에서 만든 무언가
