@@ -24,19 +24,19 @@ const userDAO = {
             //email check sql 실행
             const [respCheck] = await conn.query(sql.checkId, item.email)
 
-            console.log('000', respCheck)
+            
             if (respCheck[0]) {
-                console.log('1111')
+                
                 //이메일로 select 되는 데이터가 있다면, 이미 item.email로 가입된 회원이 있다.
                 callback({status: 500, message: '사용자가 존재합니다.'})
             } else {
-                console.log('2222')
+                
                 //데이터가 없다면 email 중복되지 않는다는 얘기.
                 //회원가입하게 table에 insert하면 됨.
                 //유저 password는 hash 문자열로 변형시켜서 저장.
                 const salt = await bcrypt.genSalt()
                 bcrypt.hash(item.password, salt, async (error, hash) => {
-                    console.log('3333')
+                    
                     if (error) callback({status: 500, message: '암호화 실패', error: error})
                     else {
                         //db insert
