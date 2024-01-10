@@ -13,4 +13,13 @@ router.post('/signup', async (req, res, next) => {
     })
 })
 
+router.post('/signin', (req, res, next) => { //url이 signin으로 들어온다면 실행
+    console.log('login router....')
+    const data = req.body
+    userDAO.login(data, (resp) => {
+        // client에 응답
+        res.json(resp)
+    })
+}) 
+
 module.exports = router
