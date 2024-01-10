@@ -9,7 +9,7 @@ const Home = () => {
             - html 주석 
             - html은 single tag를 허용하지만 jsx는 xml 문법이다. single tag 허용하지 않는다.
             - a =>  Link 
-            - className => classNameName
+            - className => className
             - style : inline style, jsx - javascript 표현식으로 
             - 이미지 경로 public의 images로 변경 */}
             {/* <!-- ======= Intro Section ======= --> */}

@@ -7,7 +7,7 @@ const Footer = () => {
             {/* bootstrap index.html 하단의 footer 부분 복사해서 적용 html vs jsx 차이점 해결 
             - html 주석 제거
             - a 태그를 Link로 교체 
-            - className -> classNameName으로 교체.. 편집 -> 바꾸기 메뉴를 이용해서 */}
+            - className -> className으로 교체.. 편집 -> 바꾸기 메뉴를 이용해서 */}
             {/* <!-- ======= Footer ======= --> */}
             <section className="section-footer">
                 <div className="container">

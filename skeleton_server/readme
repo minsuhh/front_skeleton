@@ -14,6 +14,16 @@ http://localhost:8000/
 >git commit -m "초기 셋팅"
 >git push -u origin main
 
+//지운 파일 복원시키기
+1. 첫번째 방법
+>git log --oneline
+>git reset --hard 해시
+    (해시 => 돌리고자 하는 부분의 해시값)
+>git push  -f origin main 
+    (동기화가 안되어있어도 강제로 push)
+2. 두번째 방법 (새로운 폴더 및 환경 생성)
+
+
 //서버 구동 명령어
 >npm nodemon app.js
 

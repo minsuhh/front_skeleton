@@ -1,9 +1,32 @@
+import React, { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
 const SignUp = () => {
+    //url path 조정하려고
+
+    const navigate = useNavigate()
+
+    //controlled component를 위해서
+    const [data, setData] = useState({name:'', email:'', password:''})
+    //  유저 입력 변경 이벤트
+    const changeData = useCallback((e) => {
+        setData((data) => ({...data, [e.target.name]: e.target.value}))
+    }, [])
+    // submit 버튼 클릭 이벤트
+    const signup = useCallback(async (e) => {
+        e.preventDefault()
+        //서버 연동
+        const resp = await axios.post('http://localhost:8000/users/signup', data)
+        if(resp.data.status === 500) window.alert('사용자가 존재합니다.')
+        //첫 화면으로 화면 전환
+        else navigate('/')
+    }, [data, navigate])
     return (
         <main id="main">
 
             {/* <!-- ======= Intro Single ======= --> */}
-            <section classNameName="intro-single">
+            <section className="intro-single">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 col-lg-8">
@@ -31,53 +54,29 @@ const SignUp = () => {
             {/* <!-- ======= About Section ======= --> */}
             <section className="section-about">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-sm-12 position-relative">
-                            <div className="about-img-box">
-                                <img src="images/slide-about-1.jpg" alt="" className="img-fluid"/>
-                            </div>
-                            <div className="sinse-box">
-                                <h3 className="sinse-title">EstateAgency
-                                    <span></span>
-                                    <br/> Sinse 2017
-                                </h3>
-                                <p>Art & Creative</p>
-                            </div>
+                    {/* ajax로 서버에 유저 입력 데이터를 전송할 것이므로, ajax에서 서버 url 지정, http request method 지정한다.
+                    그러므로 form 태그는 선언하지만 method, action 속성을 지정하지 않아도 된다. */}
+                    <form className="row">
+                        <div className="col-sm12 position-relative form-group mb-3">
+                            <label htmlFor="email" className="form-label">Email</label>
+                            <input type="text" className="form-control" id="email" name="email" 
+                            value={data.email} onChange={changeData}/>
                         </div>
-                        <div className="col-md-12 section-t8 position-relative">
-                            <div className="row">
-                                <div className="col-md-6 col-lg-5">
-                                    <img src="images/about-2.jpg" alt="" className="img-fluid"/>
-                                </div>
-                                <div className="col-lg-2  d-none d-lg-block position-relative">
-                                    <div className="title-vertical d-flex justify-content-start">
-                                        <span>EstateAgency Exclusive Property</span>
-                                    </div>
-                                </div>
-                                <div className="col-md-6 col-lg-5 section-md-t3">
-                                    <div className="title-box-d">
-                                        <h3 className="title-d">Sed
-                                            <span className="color-d">porttitor</span> lectus
-                                            <br/> nibh.
-                                        </h3>
-                                    </div>
-                                    <p className="color-text-a">
-                                        Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget
-                                        consectetur sed, convallis
-                                        at tellus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum
-                                        ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit
-                                        neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-                                    </p>
-                                    <p className="color-text-a">
-                                        Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.
-                                        Mauris blandit aliquet
-                                        elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur sed,
-                                        convallis at tellus.
-                                    </p>
-                                </div>
-                            </div>
+                        <div className="col-sm12 position-relative form-group mb-3">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="password" name="password" 
+                            value={data.password} onChange={changeData}/>
                         </div>
-                    </div>
+                        <div className="col-sm12 position-relative form-group mb-3">
+                            <label htmlFor="name" className="form-label">Name</label>
+                            <input type="text" className="form-control" id="name" name="name" 
+                            value={data.name} onChange={changeData}/>
+                        </div>
+                        <div className="col-sm12 position-relative form-group">
+                            <button type="submit" className="btn btn-danger btn-sm" onClick={signup}>send</button>
+                            <button type="reset" className="btn btn-primary btn-sm">reset</button>
+                        </div>
+                    </form>
                 </div>
             </section>
 
@@ -97,14 +96,16 @@ const SignUp = () => {
                         <div className="col-md-4">
                             <div className="card-box-d">
                                 <div className="card-img-d">
-                                    <img src="images/agent-7.jpg" alt="" className="img-d img-fluid"/>
+                                    {/* 이 컴포넌트가 라우팅이 되는 조건. 
+                                    http://localhost:5173/user/images/agent-7.jpg */}
+                                    <img src="/images/agent-7.jpg" alt="" className="img-d img-fluid" />
                                 </div>
                                 <div className="card-overlay card-overlay-hover">
                                     <div className="card-header-d">
                                         <div className="card-title-d align-self-center">
                                             <h3 className="title-d">
                                                 <a href="agent-single.html" className="link-two">Margaret Sotillo
-                                                    <br/> Escala</a>
+                                                    <br /> Escala</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -153,14 +154,14 @@ const SignUp = () => {
                         <div className="col-md-4">
                             <div className="card-box-d">
                                 <div className="card-img-d">
-                                    <img src="images/agent-6.jpg" alt="" className="img-d img-fluid"/>
+                                    <img src="/images/agent-6.jpg" alt="" className="img-d img-fluid" />
                                 </div>
                                 <div className="card-overlay card-overlay-hover">
                                     <div className="card-header-d">
                                         <div className="card-title-d align-self-center">
                                             <h3 className="title-d">
                                                 <a href="agent-single.html" className="link-two">Stiven Spilver
-                                                    <br/> Darw</a>
+                                                    <br /> Darw</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -214,14 +215,14 @@ const SignUp = () => {
                         <div className="col-md-4">
                             <div className="card-box-d">
                                 <div className="card-img-d">
-                                    <img src="images/agent-5.jpg" alt="" className="img-d img-fluid"/>
+                                    <img src="/images/agent-5.jpg" alt="" className="img-d img-fluid" />
                                 </div>
                                 <div className="card-overlay card-overlay-hover">
                                     <div className="card-header-d">
                                         <div className="card-title-d align-self-center">
                                             <h3 className="title-d">
                                                 <a href="agent-single.html" className="link-two">Emma Toledo
-                                                    <br/> Cascada</a>
+                                                    <br /> Cascada</a>
                                             </h3>
                                         </div>
                                     </div>
