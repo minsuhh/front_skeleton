@@ -10,10 +10,10 @@ const BoardList = () => {
     const getBoardList = useCallback(async () => {
         const resp = await axios.get('http://localhost:8000/boards/boardList')
         setBoardList(resp.data)
-    })
+    }, [])
 
     useEffect(()=> {
-        setBoardList()
+        getBoardList()
     },[getBoardList])
 
     return (

@@ -17,8 +17,7 @@ const boardDAO = {
             const [rows] = await conn.query(sql.boardList)
             console.log('11', rows) //디버깅용 , 조회내용 확인 완
             
-            callback ({status: 200, message: 'OK', 
-            data: {rows}})
+            callback ({status: 200, message: 'OK', data: rows})
         } catch (error) {
             return { status: 500, message: '조회 실패', error: error }
         } finally {
